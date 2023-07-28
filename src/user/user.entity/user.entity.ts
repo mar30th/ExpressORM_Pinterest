@@ -13,9 +13,8 @@ export class UserLogin {
 }
 
 export class UserUpdate {
-    email: string;
-    full_name: string;
-    password: string;
-    age: number;
-    avatar: string;
+    email?: string;
+    full_name?: string;
+    age?: number;
+    avatar?: string;
 }

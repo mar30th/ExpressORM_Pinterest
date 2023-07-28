@@ -10,5 +10,9 @@ export class PostImage {
     image_name: string;
     link: string;
     description: string;
+}
+
+export class DeleteImage {
     user_id: number;
+    image_id: number;
 }

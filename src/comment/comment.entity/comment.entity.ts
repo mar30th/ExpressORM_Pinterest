@@ -7,7 +7,6 @@ export class CommentEntity {
 }
 
 export class PostComment {
-    user_id: number;
     image_id: number;
     comment_content: string
 }
