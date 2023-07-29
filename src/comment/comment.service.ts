@@ -1,7 +1,7 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaClient } from '@prisma/client';
-import { PostComment } from './comment.entity/comment.entity';
+import { CommentCreateDto } from './comment.dto/comment-create.dto';
 
 @Injectable()
 export class CommentService {
@@ -18,7 +18,7 @@ export class CommentService {
   }
 
   // POST để lưu thông tin bình luận của người dùng với hình ảnh
-  async postComment(token: string, comment: PostComment) {
+  async postComment(token: string, comment: CommentCreateDto) {
     const decodedToken = this.jwtService.decode(
       token.replace('Bearer ', ''),
     ) as any;

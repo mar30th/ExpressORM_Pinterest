@@ -1,8 +1,10 @@
 import { Body, Controller, Get, Headers, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { PostComment } from './comment.entity/comment.entity';
+import { ApiTags } from '@nestjs/swagger';
+import { CommentCreateDto } from './comment.dto/comment-create.dto';
 import { CommentService } from './comment.service';
 
+@ApiTags("Comment")
 @UseGuards(AuthGuard("jwt"))
 @Controller('comment')
 export class CommentController {
@@ -14,7 +16,7 @@ export class CommentController {
     }
 
     @Post('/post_comment')
-    async postComment(@Headers("Authorization") token: string, @Body() comment: PostComment) {
+    async postComment(@Headers("Authorization") token: string, @Body() comment: CommentCreateDto) {
         return this.commentService.postComment(token, comment);
     }
 }

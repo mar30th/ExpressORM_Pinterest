@@ -1,15 +1,11 @@
-import { Body, HttpCode, Injectable, Req, UnauthorizedException } from '@nestjs/common';
-import { PrismaClient, user } from '@prisma/client';
-import { UserEntity, UserLogin, UserUpdate } from './user.entity/user.entity';
-import { failCode, successCode } from '../config/response.js';
-import { PostImage } from 'src/image/image.entity/image.entity';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { PrismaClient } from '@prisma/client';
 import { JwtService } from '@nestjs/jwt';
+import { UserUpdateDto } from './user.dto/user-update.dto.js';
 
 @Injectable()
 export class UserService {
   private prisma: PrismaClient;
-  // private readonly jwtService: JwtService;
-
   constructor(private readonly jwtService: JwtService) {
     this.prisma = new PrismaClient();
   }
@@ -67,7 +63,7 @@ export class UserService {
   }
 
   // POST cập nhật thông tin user
-  async postUpdateUser(token: string, data: UserUpdate) {
+  async postUpdateUser(token: string, data: UserUpdateDto) {
     const decodedToken = this.jwtService.decode(
       token.replace('Bearer ', ''),
     ) as any;

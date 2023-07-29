@@ -14,15 +14,19 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { diskStorage } from 'multer';
-import { DeleteImage, PostImage } from './image.entity/image.entity';
+import { FileUploadDto } from './image.dto/file-upload-image.dto.ts';
 import { ImageService } from './image.service';
 
+@ApiTags("Image")
 @UseGuards(AuthGuard('jwt'))
 @Controller('image')
 export class ImageController {
   constructor(private readonly imageService: ImageService) {}
 
+  @ApiConsumes("multipart/form-data")
+  @ApiBody({type: FileUploadDto})
   @UseInterceptors(FileInterceptor("file_image", {
     storage: diskStorage({
       destination: process.cwd() + "/public/img",

@@ -80,8 +80,6 @@ export class SaveImageService {
       token.replace("Bearer ", ""),
     ) as any;
     const user_id = decodedToken?.data?.user_id;
-    console.log(decodedToken);
-    
     if(!user_id) {
       throw new UnauthorizedException("Invalid Token")
     }
@@ -90,8 +88,7 @@ export class SaveImageService {
         user_id_image_id: {user_id, image_id}
       }
     })
-    if(!checkSavedImage){
-      return false;
-    } return true;
+    const result = checkSavedImage? true : false;
+    return result;
   }
 }

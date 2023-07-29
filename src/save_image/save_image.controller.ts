@@ -9,9 +9,10 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { SaveImage } from './save_image.entity/save_image.entity';
+import { ApiTags } from '@nestjs/swagger';
 import { SaveImageService } from './save_image.service';
 
+@ApiTags("Save Image")
 @UseGuards(AuthGuard("jwt"))
 @Controller('save-image')
 export class SaveImageController {

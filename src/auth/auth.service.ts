@@ -2,8 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaClient } from '@prisma/client';
-import { UserEntity, UserLogin } from 'src/user/user.entity/user.entity';
 import * as bcrypt from 'bcrypt';
+import { UserCreateDto } from 'src/user/user.dto/user-create.dto';
+import { AuthLoginDto } from './auth.dto/auth-login.dto';
 
 @Injectable()
 export class AuthService {
@@ -15,8 +16,9 @@ export class AuthService {
   prisma = new PrismaClient();
 
   // POST đăng ký tài khoản
-  async signUp(newUser: UserEntity) {
-    let { full_name, email, password, age, avatar } = newUser;
+  async signUp(newUser: UserCreateDto, avatar_file: Express.Multer.File) {
+    let { full_name, email, password, age } = newUser;
+    let avatar = avatar_file.filename
     let checkUser = await this.prisma.user.findMany({
       where: { email },
     });
@@ -37,7 +39,7 @@ export class AuthService {
   }
 
   // POST đăng nhập tài khoản
-  async signIn(userLogin: UserLogin) {
+  async signIn(userLogin: AuthLoginDto) {
     let { email, password } = userLogin;
     let checkUser = await this.prisma.user.findFirst({
       where: { email },

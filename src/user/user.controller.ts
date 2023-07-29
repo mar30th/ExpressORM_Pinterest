@@ -3,30 +3,31 @@ import {
   Controller,
   Get,
   Headers,
-  HttpCode,
-  HttpException,
   Param,
   ParseIntPipe,
   Post,
   Req,
   UseGuards,
 } from '@nestjs/common';
-import { UserUpdate } from './user.entity/user.entity';
 import { UserService } from './user.service';
 import { AuthGuard } from '@nestjs/passport';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { UserUpdateDto } from './user.dto/user-update.dto';
 
+@ApiBearerAuth()
 @UseGuards(AuthGuard('jwt'))
+@ApiTags("User")
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get()
-  async getUser(@Headers('token') token) {
+  async getUser(@Headers('Authorization') token: string) {
     return this.userService.getUser();
   }
 
   @Get('/:email')
-  async getUserByEmail(@Param('email') email: string, @Headers('token') token) {
+  async getUserByEmail(@Param('email') email: string, @Headers('Authorization') token: string) {
     return this.userService.getUserByEmail(email);
   }
 
@@ -37,7 +38,7 @@ export class UserController {
 
   @Get('/image-created-by/:user_id')
   async getImageCreatedByUserId(
-    @Headers('token') token,
+    @Headers('Authorization') token: string,
     @Param('user_id', ParseIntPipe) user_id: number,
   ) {
     return this.userService.getImageCreatedByUserId(user_id);
@@ -46,7 +47,7 @@ export class UserController {
   @Post('/update-user/')
   async updateUser(
     @Headers('Authorization') token: string,
-    @Body() data: UserUpdate,
+    @Body() data: UserUpdateDto,
   ) {
     return this.userService.postUpdateUser(token, data);
   }
