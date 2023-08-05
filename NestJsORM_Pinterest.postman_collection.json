@@ -1,0 +1,676 @@
+{
+	"info": {
+		"_postman_id": "c1c1262f-519b-46d1-9343-d2cbaa00b110",
+		"name": "NestJsORM_Pinterest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25802843",
+		"_collection_link": "https://crimson-station-600734.postman.co/workspace/API~d6f20b9c-2b53-4505-9531-66211d8004f5/collection/25802843-c1c1262f-519b-46d1-9343-d2cbaa00b110?action=share&creator=25802843&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "SignUp",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "full_name",
+							"value": "test10",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "user10@example.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password10",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "18",
+							"type": "text"
+						},
+						{
+							"key": "file_avatar",
+							"type": "file",
+							"src": "/Users/dongtran/Downloads/yourname.jpeg"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/auth/signup",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SignIn",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"user7@example.com\",\n    \"password\": \"password7\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/auth/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUser",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJfaWQiOjcsImVtYWlsIjoidXNlcjdAZXhhbXBsZS5jb20iLCJmdWxsX25hbWUiOiJUaG9yIiwiYWdlIjoxOCwiYXZhdGFyIjoiYXZhdGFyNy5qcGcifSwiaWF0IjoxNjkwOTU1NzU5LCJleHAiOjE2OTA5NTc1NTl9.8H3G8n3ojx3YojTyjfLUzFn7lTIFntbsz66TTqAEXgY",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/user",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUserByEmail",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJfaWQiOjEzLCJlbWFpbCI6InVzZXIxM0BleGFtcGxlLmNvbSIsImZ1bGxfbmFtZSI6InRlc3QxMyIsImFnZSI6MTgsImF2YXRhciI6Ii9wdWJsaWMvYXZhdGFyLzE2OTEyNDI2NDMyMTVhdmF0YXIucG5nIn0sImlhdCI6MTY5MTI0MjY5OSwiZXhwIjoxNjkxMjQ0NDk5fQ.tlR97OUNNnrmOhSrU82xW41A5JbFmqL9Cx82mnpPzdg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"user1@example.com\",\n    \"password\": \"password1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/user/email/user2@example.com",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"email",
+						"user2@example.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUserByUserId",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJfaWQiOjEzLCJlbWFpbCI6InVzZXIxM0BleGFtcGxlLmNvbSIsImZ1bGxfbmFtZSI6InRlc3QxMyIsImFnZSI6MTgsImF2YXRhciI6Ii9wdWJsaWMvYXZhdGFyLzE2OTEyNDI2NDMyMTVhdmF0YXIucG5nIn0sImlhdCI6MTY5MTI0MjY5OSwiZXhwIjoxNjkxMjQ0NDk5fQ.tlR97OUNNnrmOhSrU82xW41A5JbFmqL9Cx82mnpPzdg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"user1@example.com\",\n    \"password\": \"password1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/user/id/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"id",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetImage",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJfaWQiOjgsImVtYWlsIjoidXNlcjhAZXhhbXBsZS5jb20iLCJmdWxsX25hbWUiOiJUaG9yIiwiYWdlIjoxOCwiYXZhdGFyIjoiYXZhdGFyOC5qcGcifSwiaWF0IjoxNjkwNzkzNDU5LCJleHAiOjE2OTA3OTUyNTl9.PO1hneJeQu23M2I2Rv9pHY1IcnXEvOogi2oBQg7lp30",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/image",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"image"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetImageByName",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJfaWQiOjgsImVtYWlsIjoidXNlcjhAZXhhbXBsZS5jb20iLCJmdWxsX25hbWUiOiJUaG9yIiwiYWdlIjoxOCwiYXZhdGFyIjoiYXZhdGFyOC5qcGcifSwiaWF0IjoxNjkwNzkzNDU5LCJleHAiOjE2OTA3OTUyNTl9.PO1hneJeQu23M2I2Rv9pHY1IcnXEvOogi2oBQg7lp30",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/image/name/image",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"image",
+						"name",
+						"image"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetImageInfoById",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJfaWQiOjgsImVtYWlsIjoidXNlcjhAZXhhbXBsZS5jb20iLCJmdWxsX25hbWUiOiJUaG9yIiwiYWdlIjoxOCwiYXZhdGFyIjoiYXZhdGFyOC5qcGcifSwiaWF0IjoxNjkwNzkzNDU5LCJleHAiOjE2OTA3OTUyNTl9.PO1hneJeQu23M2I2Rv9pHY1IcnXEvOogi2oBQg7lp30",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/image/id/3",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"image",
+						"id",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCommentByImageID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJfaWQiOjgsImVtYWlsIjoidXNlcjhAZXhhbXBsZS5jb20iLCJmdWxsX25hbWUiOiJUaG9yIiwiYWdlIjoxOCwiYXZhdGFyIjoiYXZhdGFyOC5qcGcifSwiaWF0IjoxNjkwNzkzNDU5LCJleHAiOjE2OTA3OTUyNTl9.PO1hneJeQu23M2I2Rv9pHY1IcnXEvOogi2oBQg7lp30",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/image/comment/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"image",
+						"comment",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCheckSavedImageById",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJfaWQiOjgsImVtYWlsIjoidXNlcjhAZXhhbXBsZS5jb20iLCJmdWxsX25hbWUiOiJUaG9yIiwiYWdlIjoxOCwiYXZhdGFyIjoiYXZhdGFyOC5qcGcifSwiaWF0IjoxNjkwNzkzNDU5LCJleHAiOjE2OTA3OTUyNTl9.PO1hneJeQu23M2I2Rv9pHY1IcnXEvOogi2oBQg7lp30",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/save-image/check-saved-image/4",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"save-image",
+						"check-saved-image",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetComment",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJfaWQiOjgsImVtYWlsIjoidXNlcjhAZXhhbXBsZS5jb20iLCJmdWxsX25hbWUiOiJUaG9yIiwiYWdlIjoxOCwiYXZhdGFyIjoiYXZhdGFyOC5qcGcifSwiaWF0IjoxNjkwNzkzNDU5LCJleHAiOjE2OTA3OTUyNTl9.PO1hneJeQu23M2I2Rv9pHY1IcnXEvOogi2oBQg7lp30",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/comment",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"comment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post_Comment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJfaWQiOjgsImVtYWlsIjoidXNlcjhAZXhhbXBsZS5jb20iLCJmdWxsX25hbWUiOiJUaG9yIiwiYWdlIjoxOCwiYXZhdGFyIjoiYXZhdGFyOC5qcGcifSwiaWF0IjoxNjkwNzkzNDU5LCJleHAiOjE2OTA3OTUyNTl9.PO1hneJeQu23M2I2Rv9pHY1IcnXEvOogi2oBQg7lp30",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"image_id\": 1,\n    \"comment_content\": \"Great\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/comment/post_comment",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"comment",
+						"post_comment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetSavedImageByUserId",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJfaWQiOjEzLCJlbWFpbCI6InVzZXIxM0BleGFtcGxlLmNvbSIsImZ1bGxfbmFtZSI6InRlc3QxMyIsImFnZSI6MTgsImF2YXRhciI6Ii9wdWJsaWMvYXZhdGFyLzE2OTEyNDI2NDMyMTVhdmF0YXIucG5nIn0sImlhdCI6MTY5MTI0MjY5OSwiZXhwIjoxNjkxMjQ0NDk5fQ.tlR97OUNNnrmOhSrU82xW41A5JbFmqL9Cx82mnpPzdg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/save-image/my-saved-image",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"save-image",
+						"my-saved-image"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetImageCreatedByUserId",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJfaWQiOjEzLCJlbWFpbCI6InVzZXIxM0BleGFtcGxlLmNvbSIsImZ1bGxfbmFtZSI6InRlc3QxMyIsImFnZSI6MTgsImF2YXRhciI6Ii9wdWJsaWMvYXZhdGFyLzE2OTEyNDI2NDMyMTVhdmF0YXIucG5nIn0sImlhdCI6MTY5MTI0NDU5NywiZXhwIjoxNjkxMjQ2Mzk3fQ.FcvaKwedu5PAwMV7nR1PS6zrnf7Nf1UHiHM8aPITvj4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/user/image-created-by",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"image-created-by"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SaveImage",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJfaWQiOjgsImVtYWlsIjoidXNlcjhAZXhhbXBsZS5jb20iLCJmdWxsX25hbWUiOiJUaG9yIiwiYWdlIjoxOCwiYXZhdGFyIjoiYXZhdGFyOC5qcGcifSwiaWF0IjoxNjkwNzk3MzY4LCJleHAiOjE2OTA3OTkxNjh9.u9SX0RkmyR1dhIkaollV4v2GnktwfWz1isDhAHNzPtA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"image_id\": 2\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/save-image/post-save-image",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"save-image",
+						"post-save-image"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PostImage",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJfaWQiOjMsImVtYWlsIjoidGVzdDNAZ21haWwuY29tIiwiZnVsbF9uYW1lIjoiSm9obiBDZW5hIiwiYWdlIjoxOCwiYXZhdGFyIjoiYXZhdGFydGVzdDEifSwiaWF0IjoxNjkwNDQ2NzI3LCJleHAiOjE2OTA0NDg1Mjd9.4oSYj1fNXXp2qd6MNl9rYnqYiFoVhuXNdhV0XI6IqXs",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file_image",
+							"type": "file",
+							"src": "/Users/dongtran/Downloads/1bda9985945f4492816fc6b9d7d4791c.JPG"
+						},
+						{
+							"key": "description",
+							"value": "testing",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/image/post-image",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"image",
+						"post-image"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteImage",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJfaWQiOjMsImVtYWlsIjoidGVzdDNAZ21haWwuY29tIiwiZnVsbF9uYW1lIjoiSm9obiBDZW5hIiwiYWdlIjoxOCwiYXZhdGFyIjoiYXZhdGFydGVzdDEifSwiaWF0IjoxNjkwMzU4NTUwLCJleHAiOjE2OTAzNjAzNTB9.3yzJYhqkkpoBrMgx71sCMsA6UjqmotocZXRgcb-URtg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/image/delete-image/11",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"image",
+						"delete-image",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateUser",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJfaWQiOjgsImVtYWlsIjoidXNlcjhAZXhhbXBsZS5jb20iLCJmdWxsX25hbWUiOiJUaG9yIiwiYWdlIjoxOCwiYXZhdGFyIjoiYXZhdGFyOC5qcGcifSwiaWF0IjoxNjkwNzk3ODA0LCJleHAiOjE2OTA3OTk2MDR9.Ei8EIBEOYzIQ1RpMEACu6mf3TQoIFOxYwiFqDE_pgto",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"user8@example.com\",\n    \"full_name\": \"John Cena\",\n    \"age\": 18\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/user/update-user/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"update-user",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -35,13 +35,39 @@ export class UserService {
       const data = await this.prisma.user.findFirst({
         where: {
           email,
-        },
+        }, select: {
+          user_id: true,
+          email: true,
+          full_name: true,
+          age: true,
+          avatar: true,
+        }
       });
       return { message: 'Success', data };
     } catch (error) {
       return { message: 'Backend Error' };
     }
   }
+
+    // // GET lấy thông tin user theo id
+    async getUserById(user_id: number) {
+      try {
+        const data = await this.prisma.user.findFirst({
+          where: {
+            user_id,
+          }, select: {
+            user_id: true,
+            email: true,
+            full_name: true,
+            age: true,
+            avatar: true,
+          }
+        });
+        return { message: 'Success', data };
+      } catch (error) {
+        return { message: 'Backend Error' };
+      }
+    }
 
   // GET danh sách ảnh đã lưu theo user_id
   async getSavedImageByUserId(user_id: number) {
@@ -68,8 +94,15 @@ export class UserService {
   }
 
   // GET danh sách ảnh đã tạo theo user_id
-  async getImageCreatedByUserId(user_id: number) {
+  async getImageCreatedByUserId(token: string) {
     try {
+      const decodedToken = this.jwtService.decode(
+        token.replace('Bearer ', ''),
+      ) as any;
+      const user_id = decodedToken?.data?.user_id;
+      if(!user_id) {
+        throw new UnauthorizedException('Invalid Token');
+      }
       const data = await this.prisma.user.findUnique({
         where: {
           user_id,
@@ -104,6 +137,14 @@ export class UserService {
         throw new UnauthorizedException('Invalid Token');
       } else {
         const { email, age, full_name } = data;
+        const checkEmail = await this.prisma.user.findFirst({
+          where: {
+            email
+          }
+        })
+        if (checkEmail){
+          throw new UnauthorizedException('Email already exit!')
+        }
         await this.prisma.user.update({
           where: {
             user_id,
@@ -120,5 +161,4 @@ export class UserService {
       return { message: 'Backend Error' };
     }
   }
-
 }

@@ -24,9 +24,14 @@ export class UserController {
     return this.userService.getUser();
   }
 
-  @Get('/:email')
+  @Get('/email/:email')
   async getUserByEmail(@Param('email') email: string, @Headers('Authorization') token: string) {
     return this.userService.getUserByEmail(email);
+  }
+
+  @Get('/id/:user_id')
+  async getUserById(@Param('user_id', ParseIntPipe) user_id: number, @Headers('Authorization') token: string) {
+    return this.userService.getUserById(user_id);
   }
 
   @Get('/saved-image/:image_id')
@@ -34,12 +39,11 @@ export class UserController {
     return this.userService.getSavedImageByUserId(image_id);
   }
 
-  @Get('/image-created-by/:user_id')
+  @Get('/image-created-by/')
   async getImageCreatedByUserId(
     @Headers('Authorization') token: string,
-    @Param('user_id', ParseIntPipe) user_id: number,
   ) {
-    return this.userService.getImageCreatedByUserId(user_id);
+    return this.userService.getImageCreatedByUserId(token);
   }
 
   @Post('/update-user/')

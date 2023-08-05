@@ -56,7 +56,7 @@ export class SaveImageService {
     if(!user_id) {
       throw new UnauthorizedException("Invalid Token");
     }
-    const data = await this.prisma.user.findMany({
+    const data = await this.prisma.user.findFirst({
       where: {
         user_id,
       },

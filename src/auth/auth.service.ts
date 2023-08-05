@@ -19,7 +19,7 @@ export class AuthService {
   async signUp(newUser: UserCreateDto, avatar_file: Express.Multer.File) {
     try {
       let { full_name, email, password, age } = newUser;
-      let avatar = '/public/avatar' + avatar_file.filename;
+      let avatar = '/public/avatar/' + avatar_file.filename;
       let checkUser = await this.prisma.user.findMany({
         where: { email },
       });
