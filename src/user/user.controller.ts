@@ -6,12 +6,11 @@ import {
   Param,
   ParseIntPipe,
   Post,
-  Req,
   UseGuards,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { AuthGuard } from '@nestjs/passport';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 import { UserUpdateDto } from './user.dto/user-update.dto';
 
 @UseGuards(AuthGuard('jwt'))

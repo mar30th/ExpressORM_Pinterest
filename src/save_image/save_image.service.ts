@@ -1,6 +1,5 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
-import { failCode, successCode } from '../config/response.js';
 import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
