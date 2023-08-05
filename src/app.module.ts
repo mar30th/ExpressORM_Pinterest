@@ -13,7 +13,6 @@ import { ConfigModule } from '@nestjs/config';
 import { JwtStrategy } from './strategy/jwt.strategy';
 import { UserService } from './user/user.service';
 import { JwtModule } from '@nestjs/jwt';
-// import { JwtStrategy } from './jwt.strategy';
 
 @Module({
   imports: [

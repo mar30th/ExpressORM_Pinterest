@@ -22,11 +22,17 @@ export class AuthController {
   }))
   @Post('/signup')
   async signUp(@Body() user: UserCreateDto, @UploadedFile() avatar: Express.Multer.File) {
+    typeof user.age === 'string'? user.age = parseInt(user.age) : user.age
     return this.authService.signUp(user, avatar)
   }
 
   @Post('/login')
   async signIn(@Body() userLogin: AuthLoginDto) {
     return this.authService.signIn(userLogin);
+  }
+
+  @Post('test')
+  async test(@Body() user) {
+    return user;
   }
 }

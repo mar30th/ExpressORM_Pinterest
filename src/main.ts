@@ -9,7 +9,7 @@ async function bootstrap() {
   app.use(express.static('.'));
 
   // Swagger
-  const config = new DocumentBuilder().setTitle('Printerest Demo DB').addBearerAuth().build();
+  const config = new DocumentBuilder().setTitle('Printerest Demo DB').build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('/swagger', app, document);
 

@@ -3,9 +3,6 @@ import { FileUploadDto } from 'src/image/image.dto/file-upload-image.dto.ts';
 
 export class UserCreateDto {
   @ApiProperty()
-  user_id: number;
-
-  @ApiProperty()
   email: string;
 
   @ApiProperty()
@@ -16,7 +13,6 @@ export class UserCreateDto {
 
   @ApiProperty()
   age: number;
-
 }
 
 

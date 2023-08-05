@@ -17,24 +17,34 @@ export class AuthService {
 
   // POST đăng ký tài khoản
   async signUp(newUser: UserCreateDto, avatar_file: Express.Multer.File) {
-    let { full_name, email, password, age } = newUser;
-    let avatar = avatar_file.filename
-    let checkUser = await this.prisma.user.findMany({
-      where: { email },
-    });
-    if (checkUser.length > 0) {
-      return { success: false, message: "That email is taken. Try another." };
-    } else {
+    try {
+      let { full_name, email, password, age } = newUser;
+      let avatar = '/public/avatar' + avatar_file.filename;
+      let checkUser = await this.prisma.user.findMany({
+        where: { email },
+      });
+      if (checkUser.length > 0) {
+        return { success: false, message: 'That email is taken. Try another.' };
+      }
+      const hashedPassword = await bcrypt.hashSync(password, 10);
       const dataUser = await this.prisma.user.create({
         data: {
           email,
-          password: bcrypt.hashSync(password, 10),
+          password: hashedPassword,
           full_name,
           age,
           avatar,
         },
+        select: {
+          email: true,
+          full_name: true,
+          age: true,
+          avatar: true,
+        },
       });
       return { success: true, message: dataUser };
+    } catch (error) {
+      return { message: 'Backend Error!' };
     }
   }
 
@@ -54,10 +64,10 @@ export class AuthService {
         return {
           success: true,
           data: token,
-          message: "Welcome back, Login successfully",
+          message: 'Welcome back, Login successfully',
         };
       } else {
-        return { success: false, message: "Wrong password, try again!" };
+        return { success: false, message: 'Wrong password, try again!' };
       }
     } else {
       return {

@@ -44,13 +44,13 @@ export class ImageController {
     return this.imageService.getImage();
   }
 
-  @Get('/:image_name')
+  @Get('/name/:image_name')
   async getImageByName(@Headers('Authorization') token: string, @Param('image_name') image_name: string) {
     return this.imageService.getImageByName(image_name);
   }
 
-  @Get('/:image_id')
-  async getImageById(@Headers('Authorization') token: string, @Param('image_id', ParseIntPipe) image_id: number) {
+  @Get('/id/:image_id')
+  async getImageInfoById(@Headers('Authorization') token: string, @Param('image_id', ParseIntPipe) image_id: number) {
     return this.imageService.getImageInfoById(image_id);
   }
 

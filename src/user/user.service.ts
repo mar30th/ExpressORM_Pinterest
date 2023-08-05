@@ -2,6 +2,8 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 import { JwtService } from '@nestjs/jwt';
 import { UserUpdateDto } from './user.dto/user-update.dto.js';
+import * as bcrypt from 'bcrypt';
+
 
 @Injectable()
 export class UserService {
@@ -12,72 +14,112 @@ export class UserService {
 
   // GET Thông tin user
   async getUser() {
-    const data = await this.prisma.user.findMany({
-      select: {
-        user_id: true,
-        email: true,
-        full_name: true,
-        age: true,
-        avatar: true,
-      },
-    });
-    return data;
+    try {
+      const data = await this.prisma.user.findMany({
+        select: {
+          user_id: true,
+          email: true,
+          full_name: true,
+          age: true,
+          avatar: true,
+        },
+      });
+      return { message: 'Success', data };
+    } catch (error) {
+      return { message: 'Backend Error' };
+    }
   }
 
   // // GET lấy thông tin user theo email
   async getUserByEmail(email: string) {
-    const data = await this.prisma.user.findFirst({
-      where: {
-        email,
-      },
-    });
-    return data;
+    try {
+      const data = await this.prisma.user.findFirst({
+        where: {
+          email,
+        },
+      });
+      return { message: 'Success', data };
+    } catch (error) {
+      return { message: 'Backend Error' };
+    }
   }
 
   // GET danh sách ảnh đã lưu theo user_id
   async getSavedImageByUserId(user_id: number) {
-    const data = await this.prisma.user.findUnique({
-      where: {
-        user_id,
-      },
-      include: {
-        save_image: true,
-      },
-    });
-
-    return data;
+    try {
+      const data = await this.prisma.user.findUnique({
+        where: {
+          user_id,
+        },
+        select: {
+          user_id: true,
+          email: true,
+          save_image: {
+            select: {
+              image_id: true,
+              save_date: true,
+            },
+          },
+        },
+      });
+      return { message: 'Success', data };
+    } catch (error) {
+      return { message: 'Backend Eror' };
+    }
   }
 
   // GET danh sách ảnh đã tạo theo user_id
   async getImageCreatedByUserId(user_id: number) {
-    const data = await this.prisma.user.findUnique({
-      where: {
-        user_id,
-      },
-      include: {
-        image: true,
-      },
-    });
-
-    return data;
+    try {
+      const data = await this.prisma.user.findUnique({
+        where: {
+          user_id,
+        },
+        select: {
+          user_id: true,
+          email: true,
+          image: {
+            select: {
+              image_id: true,
+              image_name: true,
+              link: true,
+              description: true,
+            },
+          },
+        },
+      });
+      return { message: 'Success', data };
+    } catch (error) {
+      return { message: 'Backend Error' };
+    }
   }
 
   // POST cập nhật thông tin user
   async postUpdateUser(token: string, data: UserUpdateDto) {
-    const decodedToken = this.jwtService.decode(
-      token.replace('Bearer ', ''),
-    ) as any;
-    const user_id = decodedToken?.data?.user_id;
-    if (!user_id) {
-      throw new UnauthorizedException('Invalid Token');
-    } else {
-      await this.prisma.user.update({
-        where: {
-          user_id,
-        },
-        data,
-      });
-      return { message: 'User updated!', dataUpdated: data };
+    try {
+      const decodedToken = this.jwtService.decode(
+        token.replace('Bearer ', ''),
+      ) as any;
+      const user_id = decodedToken?.data?.user_id;
+      if (!user_id) {
+        throw new UnauthorizedException('Invalid Token');
+      } else {
+        const { email, age, full_name } = data;
+        await this.prisma.user.update({
+          where: {
+            user_id,
+          },
+          data: {
+            email,
+            age,
+            full_name
+          },
+        });
+        return { message: 'User updated!', dataUpdated: data };
+      }
+    } catch (error) {
+      return { message: 'Backend Error' };
     }
   }
+
 }

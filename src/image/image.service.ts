@@ -30,21 +30,25 @@ export class ImageService {
           },
         },
       });
-      return data;
+      if (data.length > 0) {
+        return {mesage: "success", data};
+      } else {
+        return {message: `Can't find image name with '${name}'`}
+      }
     } catch (error) {
       return { message: 'Backend Error' };
     }
   }
 
   // Get thông tin ảnh và người tạo ảnh bằng ID ảnh
-  async getImageInfoById(id: number) {
+  async getImageInfoById(image_id: number) {
     try {
       const data = await this.prisma.image.findUnique({
         where: {
-          image_id: id,
+          image_id,
         },
         include: {
-          user: {
+          user : {
             select: {
               user_id: true,
               email: true,

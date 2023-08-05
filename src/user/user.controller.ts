@@ -14,7 +14,6 @@ import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { UserUpdateDto } from './user.dto/user-update.dto';
 
-@ApiBearerAuth()
 @UseGuards(AuthGuard('jwt'))
 @ApiTags("User")
 @Controller('user')
@@ -31,7 +30,7 @@ export class UserController {
     return this.userService.getUserByEmail(email);
   }
 
-  @Get('/id/savedimage/:image_id')
+  @Get('/saved-image/:image_id')
   async getSavedImageById(@Param('image_id', ParseIntPipe) image_id: number) {
     return this.userService.getSavedImageByUserId(image_id);
   }
